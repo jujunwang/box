@@ -59,7 +59,7 @@ func (db *box) Merge() error {
 			}
 			return err
 		}
-		// To find latest entry
+		// 找到最近一次添加的记录
 		if off, ok := db.indexes[string(e.Key)]; ok && off == offset {
 			validEntries = append(validEntries, e)
 		}

@@ -12,7 +12,7 @@ box是基于[bitcask](https://riak.com/assets/bitcask-intro.pdf)论文提出的L
 
 每个bitcask实例就是一个目录，该目录下的文件分为`active data file`和`older data file`，某一时刻bitcask实例中只能有一个`active data file`，当该文件达到一个大小阈值时，它将被关闭，并创建一个新的活动文件。一旦一个文件被关闭(不管是有意关闭还是由于服务器退出)，它就被认为是不可变的，并且再也不会打开来写入。
 
-![](https://tva1.sinaimg.cn/large/008i3skNgy1gxkf3rchqzj319e0u0acp.jpg)
+![01](https://github.com/jujunwang/picture/blob/master/XiaojunScreenshot2022-07-16%2021.31.45.png?raw=true)
 
 ### 内存索引
 
@@ -20,7 +20,7 @@ bitcask实例需要在内存中维护一个全局索引结构，`key`会存储�
 
 当写操作发生时，`keydir`被原子的更新，更新成新的文件上的位置，文件上的老数据还在磁盘上，新的读操作会使用新的`keydir`。
 
-![](https://tva1.sinaimg.cn/large/008i3skNgy1gxkf0pw880j31ei0u0n0k.jpg)
+![](https://github.com/jujunwang/picture/blob/master/XiaojunScreenshot2022-07-16%2021.32.12.png?raw=true)
 
 #### 数据记录格式
 
@@ -69,7 +69,7 @@ func (db *box) Merge() error {
 			}
 			return err
 		}
-		// To find latest entry
+		// 找到最近一次添加的记录
 		if off, ok := db.indexes[string(e.Key)]; ok && off == offset {
 			validEntries = append(validEntries, e)
 		}
